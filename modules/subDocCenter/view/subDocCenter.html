@@ -1,0 +1,20 @@
+<div ng-controller="subDocCenterController as vm" class="innerTop">
+    <ol class="breadcrumb"></ol>
+    <div class="pLR40">
+        <div class="rightDiv">
+            <div class="rightContTitle">
+                <h2>文档中心</h2>
+            </div>
+            <div class="detailDiv mb20" ng-repeat="obj in vm.list">
+                <h2 ng-bind="'文档' + ($index + 1)"></h2>
+                <div class="detailIn">
+                    <p ng-bind="'文档用途：'+ obj.document"></p>
+                    <p ng-bind="'文档版本：'+obj.version"></p>
+                    <p ng-bind="'更新时间：'+ (obj.updateAt | date : 'yyyy-MM-dd')"></p>
+                    <p><a ng-href="{{obj.documentUrl}}" target="_blank">点击下载</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

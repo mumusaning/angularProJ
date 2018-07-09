@@ -1,0 +1,253 @@
+<div ng-controller="pricingFactorController as vm" class="innerTop" ng-init="vm.getPagedDataAsync()">
+    <div class="popMask" ng-if="vm.popShow">
+        <div class="popDiv">
+            <h3 class="mb15">添加因子</h3>
+            <img src="static/images/closeIco.png" ng-click="vm.popShow = false"/>
+            <div class="overfl mb20">
+                <p class="f_l lh40 w100 text_r">因子id：</p>
+                <div class="f_l mr20">
+                    <input type="text" class="f_l form-control w120"/>
+                </div>
+                <p class="f_l lh40 w100 text_r">调整系数：</p>
+                <div class="f_l">
+                    <input type="text" class="f_l form-control w120"/>
+                </div>
+            </div>
+            <div class="overfl mb20">
+                <p class="f_l lh40  w100 text_r">项目：</p>
+                <select class="form-control w120 f_l mr20">
+                    <option value="">全部</option>
+                    <option value="1">商户信用等级</option>
+                    <option value="2">复购情况</option>
+                </select>
+                <p class="f_l lh40 w100 text_r">内容：</p>
+                <div class="f_l">
+                    <input type="text" class="f_l form-control w120"/>
+                </div>
+            </div>
+            <div class="overfl mb20">
+                <p class="f_l lh40  w100 text_r">备注：</p>
+                <textarea class="form-control f_l" style="width:360px;"></textarea>
+            </div>
+            <div style="text-align: center">
+                <input type="button" class="btn-warning btn mr10" value="提交" ng-click="vm.popShow = false"/>
+            </div>
+        </div>
+    </div>
+    <div class="popMask" ng-if="vm.popFactor">
+        <div class="popDiv">
+            <h3 class="mb15">调价系数明细</h3>
+            <img src="static/images/closeIco.png" ng-click="vm.popFactor = false"/>
+            <div class="overfl" style="width:600px">
+                <p class="f_l mt10"><span class="c_fe5757">货损包</span>调价系数：</p>
+                <div class="f_r">
+                    <input type="button" class="btn-warning btn mr10" value="计算"/>
+                    <input type="button" class="btn-info btn" value="一键调价" ng-click="vm.base_1 = 1.05;vm.float_1 = 1.08"/>
+                </div>
+            </div>
+            <div class="overfl mt10" style="border-bottom:1px solid #ddd;padding-bottom:15px">
+                <p class="f_l lh40"><span>基础系数：</span></p>
+                <input type="text" class="f_l w90 form-control mr10" ng-model="vm.base_1"/>
+                <p class="f_l lh40"><span>浮动系数：</span></p>
+                <input type="text" class="f_l w90 form-control mr5" ng-model="vm.float_1"/>
+                <p class="f_r lh40">=0.9785</p>
+            </div>
+            <div class="overfl mt10" style="width:600px">
+                <p class="f_l mt10"><span class="c_fe5757">延时包</span>调价系数：</p>
+                <div class="f_r">
+                    <input type="button" class="btn-warning btn mr10" value="计算"/>
+                    <input type="button" class="btn-info btn" value="一键调价" ng-click="vm.base_2 = 1.05;vm.float_2 = 1.08"/>
+                </div>
+            </div>
+            <div class="overfl mt10" style="border-bottom:1px solid #ddd;padding-bottom:15px">
+                <p class="f_l lh40"><span>基础系数：</span></p>
+                <input type="text" class="f_l w90 form-control mr10" ng-model="vm.base_2"/>
+                <p class="f_l lh40"><span>浮动系数：</span></p>
+                <input type="text" class="f_l w90 form-control mr5" ng-model="vm.float_2"/>
+                <p class="f_r lh40">=0.9785</p>
+            </div>
+            <div class="overfl mt10" style="width:600px">
+                <p class="f_l mt10"><span class="c_fe5757">通关宝</span>调价系数：</p>
+                <div class="f_r">
+                    <input type="button" class="btn-warning btn mr10" value="计算"/>
+                    <input type="button" class="btn-info btn" value="一键调价"  ng-click="vm.base_3 = 1.05;vm.float_3 = 1.08"/>
+                </div>
+            </div>
+            <div class="overfl mt10" style="border-bottom:1px solid #ddd;padding-bottom:15px">
+                <p class="f_l lh40"><span>基础系数：</span></p>
+                <input type="text" class="f_l w90 form-control mr10" ng-model="vm.base_3"/>
+                <p class="f_l lh40"><span>浮动系数：</span></p>
+                <input type="text" class="f_l w90 form-control mr5" ng-model="vm.float_3"/>
+                <p class="f_r lh40">=0.9785</p>
+            </div>
+            <div class="overfl mt20 f_l" >
+                <input type="button" class="btn-info btn mr10" value="全部调价" ng-click="vm.popFactor = false"/>
+                <input type="button" class="btn-warning btn " value="取消" ng-click="vm.popFactor = false"/>
+            </div>
+            <!--<div class="overfl c_999 lh40 f_l mt20">-->
+            <!--<p>注： F1-商户理赔率</p>-->
+            <!--<p style="padding-left:36px">F2-单量等级</p>-->
+            <!--<p style="padding-left:36px">F3-商户类型</p>-->
+            <!--<p style="padding-left:36px">F4-上一次调价系数</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <ol class="breadcrumb"></ol>
+    <div class="pLR40">
+        <div class="rightDiv">
+            <div class="rightContTitle">
+                <h2>定价因子</h2>
+            </div>
+            <h2 class="titleNav" style="position:relative">
+                初始报价：
+                <input type="button" class="btn btn-warning" value="添加因子" ng-click="vm.popShow = true"
+                       style="position: absolute;right:110px;top:5px">
+                <input type="button" class="btn btn-info" value="算法调整" style="position: absolute;right:0px;top:5px" ng-click="vm.popFactor = true">
+            </h2>
+            <div class="tableList">
+                <table class="table tableInfo">
+                    <tr>
+                        <th>序号</th>
+                        <th>因子id</th>
+                        <th>项目</th>
+                        <th>内容</th>
+                        <th>调整系数</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="customer in vm.listBase">
+                        <td ng-bind="$index + 1"></td>
+                        <td ng-bind="customer.id"></td>
+                        <td ng-bind="customer.obj"></td>
+                        <td ng-bind="customer.content"></td>
+                        <td ng-bind="customer.code"></td>
+                        <td ng-bind="customer.date"></td>
+                        <td><a href="javascript:;">编辑</a> | <a href="javascript:;" ng-click="vm.delete($index)">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="page ng-isolate-scope">
+                    <ul>
+                        <li class="pre prev-disabled" ng-if="vm.pageNum == 1"><span>上一页</span></li>
+                        <li class="pre" ng-if="vm.pageNum != 1"><a href="javascript:void(0)"
+                                                                   ng-click="vm.goTo(vm.pageNum - 1)">上一页</a></li>
+                        <li class="active" ng-if="vm.pageNum == 1"><span>1</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(1)" ng-if="vm.pageNum != 1">1</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 2"><span>2</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(2)" ng-if="vm.pageNum != 2">2</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 3"><span>3</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(3)" ng-if="vm.pageNum != 3">3</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 4"><span>4</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(4)" ng-if="vm.pageNum != 4">4</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 5"><span>5</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(5)" ng-if="vm.pageNum != 5">5</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 6"><span>6</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(6)" ng-if="vm.pageNum != 6">6</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 7"><span>7</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(7)" ng-if="vm.pageNum != 7">7</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 8"><span>8</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(8)" ng-if="vm.pageNum != 8">8</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 9"><span>9</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(9)" ng-if="vm.pageNum != 9">9</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 10"><span>10</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(10)" ng-if="vm.pageNum != 10">10</a></li>
+
+                        <li class="active" ng-if="vm.pageNum == 11"><span>11</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goTo(11)" ng-if="vm.pageNum != 11">11</a></li>
+
+                        <li class="pre prev-disabled" ng-if="vm.pageNum == 11"><span>下一页</span></li>
+                        <li class="next"><a href="javascript:void(0)" ng-if="vm.pageNum != 10" ng-click="vm.goTo(vm.pageNum + 1)">下一页</a></li>
+                        <li class="next"><a href="javascript:void(0)" style="margin-left:10px" ng-click="vm.goTo(11)">末页</a></li>
+                    </ul>
+                    <div class="totalPage" style="line-height:33px">共 <em>11</em> 页</div>
+                </div>
+            </div>
+            <h2 class="titleNav mt20" style="position:relative">
+                动态调价：
+                <input type="button" class="btn btn-warning" value="添加因子" ng-click="vm.popShow = true"
+                       style="position: absolute;right:110px;top:5px">
+                <input type="button" class="btn btn-info" value="算法调整" style="position: absolute;right:0px;top:5px" ng-click="vm.popFactor = true">
+            </h2>
+            <div class="tableList">
+                <table class="table tableInfo">
+                    <tr>
+                        <th>序号</th>
+                        <th>因子id</th>
+                        <th>项目</th>
+                        <th>内容</th>
+                        <th>调整系数</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr ng-repeat="customer in vm.listFloat">
+                        <td ng-bind="$index + 1"></td>
+                        <td ng-bind="customer.id"></td>
+                        <td ng-bind="customer.obj"></td>
+                        <td ng-bind="customer.content"></td>
+                        <td ng-bind="customer.code"></td>
+                        <td ng-bind="customer.date"></td>
+                        <td><a href="javascript:;">编辑</a> | <a href="javascript:;" ng-click="vm.delete($index)">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="page ng-isolate-scope">
+                    <ul>
+                        <li class="pre prev-disabled" ng-if="vm.pageNumber == 1"><span>上一页</span></li>
+                        <li class="pre" ng-if="vm.pageNumber != 1"><a href="javascript:void(0)"
+                                                                   ng-click="vm.goToNumber(vm.pageNumber - 1)">上一页</a></li>
+                        <li class="active" ng-if="vm.pageNumber == 1"><span>1</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(1)" ng-if="vm.pageNumber != 1">1</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 2"><span>2</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(2)" ng-if="vm.pageNumber != 2">2</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 3"><span>3</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(3)" ng-if="vm.pageNumber != 3">3</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 4"><span>4</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(4)" ng-if="vm.pageNumber != 4">4</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 5"><span>5</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(5)" ng-if="vm.pageNumber != 5">5</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 6"><span>6</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(6)" ng-if="vm.pageNumber != 6">6</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 7"><span>7</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(7)" ng-if="vm.pageNumber != 7">7</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 8"><span>8</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(8)" ng-if="vm.pageNumber != 8">8</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 9"><span>9</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(9)" ng-if="vm.pageNumber != 9">9</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 10"><span>10</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(10)" ng-if="vm.pageNumber != 10">10</a></li>
+
+                        <li class="active" ng-if="vm.pageNumber == 11"><span>11</span></li>
+                        <li><a href="javascript:void(0);" ng-click="vm.goToNumber(11)" ng-if="vm.pageNumber != 11">11</a></li>
+
+                        <li class="pre prev-disabled" ng-if="vm.pageNumber == 11"><span>下一页</span></li>
+                        <li class="next"><a href="javascript:void(0)" ng-if="vm.pageNumber != 11" ng-click="vm.goToNumber(vm.pageNumber + 1)">下一页</a></li>
+                        <li class="next"><a href="javascript:void(0)" style="margin-left:10px" ng-click="vm.goToNumber(11)">末页</a></li>
+                    </ul>
+                    <div class="totalPage" style="line-height:33px">共 <em>11</em> 页</div>
+                </div>
+            </div>
+            <h2 class="titleNav mt20" style="position:relative">定价因子动态分布</h2>
+            <div class="pricingDiv" id="pricing">
+
+            </div>
+        </div>
+    </div>
+</div>

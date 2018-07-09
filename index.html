@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <title>豆沙包保险SaaS服务平台</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min_v3.3.4.css">
+    <link rel="stylesheet" href="static/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/pop.css">
+</head>
+
+<body ng-app="app">
+<div ng-controller="indexController as vm" ng-init="vm.init()">
+    <div id="top" class="clearfix">
+        <div class="applogo"><img src="static/images/logo.png"/></div>
+        <ul class="userLeft" ng-if="vm.isFront == 1 && vm.isAdmin == 'false'">
+            <!--<li>-->
+            <!--<a href="javascript:;" class="c_000" ng-click="vm.toDashborad()">-->
+            <!--<i class="f_l"><img src="static/images/overview.png"/> </i>-->
+            <!--<p class="f_l ml5">总览</p>-->
+            <!--</a>-->
+            <!--</li>-->
+            <li>
+                <a href="javascript:;" class="c_000" ng-click="vm.toSelf()">
+                    <i class="f_l"><img src="static/images/backstage.png"/> </i>
+                    <p class="f_l ml5">后台管理中心</p>
+                </a>
+            </li>
+        </ul>
+        <div class="topRight">
+            <ul class="userAddInfo">
+                <li ng-if="vm.isFront == 1 && vm.isAdmin == 'false'">
+                    <a href="javascript:;" ui-sref="businessManage">商户管理</a>
+                    <!--<a href="javascript:;" ui-sref="userManage">用户管理</a>-->
+                </li>
+                <li class="ePointBg" onclick="window.open('http://echain.one/')"
+                    ng-if="vm.isFront == 0 && vm.isAdmin == 'false'">
+                    <span class="c_fff" ng-bind="'ePoints：'+ vm.ePoints"></span>
+                </li>
+                <li style="margin:0">
+                    <!--<i class="userHead f_l"><img src="static/images/user.jpg"/> </i>-->
+                    <div class="dropdown f_l ml5">
+                        <p ng-bind="vm.user" class="f_l mr5" id="dropdownMenu1" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="true"></p>
+                        <span class="caret mt0"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li style="float: none;margin:0" ng-if="vm.isFront == 1 && vm.isAdmin == 'false'"
+                                ui-sref="personalCenter">个人中心
+                            </li>
+                            <li ng-click="vm.logout()" style="float: none;margin:0">安全退出</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <aside>
+        <div id="sider">
+            <div class="subMenu" ng-repeat="nav in vm.menuList">
+                <div class="navTitle">
+                    <div class="textRight">
+                        <i ng-class="nav.class"></i>
+                        <h3 ng-bind="nav.title"></h3>
+                    </div>
+                    <i class="arrow"></i>
+                </div>
+                <ul>
+                    <li ui-sref="{{listObj.url}}" ng-repeat="listObj in nav.list"
+                        ng-class="{'hover':vm.state.current.name.indexOf(listObj.url) != -1}">
+                        <div class="textRight">
+                            <a ng-bind="listObj.name"></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+</div>
+<div class="wrap">
+    <div ui-view></div>
+</div>
+<script src="static/js/jquery/jquery-1.10.2.min.js"></script>
+<script src="static/js/qrcode.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+<script src="static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="static/js/jquery/jquery.slimscroll.min.js"></script>
+<script src="static/js/menu.js"></script>
+<!--<script src="static/js/echarts/echarts.js"></script>-->
+<script src="static/js/angular/angular.min.js"></script>
+<script src="static/js/angular/angular-file-upload.min.js"></script>
+<script src="static/js/angular/angular-ui-router.js"></script>
+<script src="static/js/angular/angular-cookies.min.js"></script>
+<script src="static/js/angular/ocLazyLoad.min.js"></script>
+<!--<script type="text/javascript" src="static/js/ueditor/ueditor.config.js"></script>-->
+<!--<script type="text/javascript" src="static/js/ueditor/ueditor.all.js"></script>-->
+<!--<script type="text/javascript" src="core/directives/ueditorDirective.js"></script>-->
+<script type="text/javascript" src="static/js/common.js"></script>
+<!--<script src="core/configs/config.js"></script>-->
+<script src="core/configs/testConfig.js"></script>
+<!--<script src="static/js/md5.js"></script>-->
+<script src="core/services/service.js"></script>
+<script src="core/services/util.js"></script>
+<script src="core/services/layer/layer.js"></script>
+<script src="core/services/layer.js"></script>
+<script src="core/directives/directive.js"></script>
+<script src="static/js/FileSaver.js"></script>
+<!--<script src="static/js/ag-ui-bs/angular-locale_zh-cn.js"></script>-->
+<!--<script src="static/js/angular/angular-animate.min.js"></script>-->
+<!--<script src="static/js/angular/angular-touch.min.js"></script>-->
+<script src="static/js/ag-ui-bs/ui-bootstrap-tpls.js"></script>
+<script src="static/js/initDate.js"></script>
+<script src="static/js/xlsx.core.min.js"></script>
+<script src="static/js/jquery.table2excel.min.js"></script>
+<script src="app.js"></script>
+<script src="core/routes/router.js"></script><!--总路由-->
+<script src="modules/index/controller/indexController.js"></script><!--首页-->
+<!--前台路由-->
+<script src="modules/customerInsure/controller/customerInsure.js"></script><!--客户投保-->
+<script src="modules/customerInsureDetails/controller/customerInsureDetails.js"></script><!--客户投保详情-->
+<script src="modules/customerInsureAdd/controller/customerInsureAdd.js"></script><!--客户投保-新增-->
+<script src="modules/orderFiling/controller/orderFiling.js"></script><!--订单归档-->
+<script src="modules/claimOrder/controller/claimOrder.js"></script><!--理赔订单-->
+<script src="modules/claimOrderAdd/controller/claimOrderAdd.js"></script><!--理赔订单-新增-->
+<script src="modules/claimOrderDetails/controller/claimOrderDetails.js"></script><!--理赔订单-详情-->
+<script src="modules/claimBill/controller/claimBill.js"></script><!--理赔账单-->
+<script src="modules/auditedBillFront/controller/auditedBillFront.js"></script><!--待审核账单-->
+<script src="modules/settleRecordFront/controller/settleRecordFront.js"></script><!--结算记录-->
+<script src="modules/subDocCenter/controller/subDocCenter.js"></script><!--文档中心-->
+<script src="modules/businessInform/controller/businessInform.js"></script><!--商户中心-->
+<script src="modules/recharge/controller/recharge.js"></script><!--充值-->
+<script src="modules/largeRecharge/controller/largeRecharge.js"></script><!--大额充值-->
+<script src="modules/largeRechargeDetails/controller/largeRechargeDetails.js"></script><!--大额充值详情-->
+<script src="modules/capitalFlow/controller/capitalFlow.js"></script><!--资金流水-->
+<!--后台路由-->
+<script src="modules/personalOrder/controller/personalOrder.js"></script><!--个人订单-->
+<script src="modules/personalOrderDetails/controller/personalOrderDetails.js"></script><!--个人订单详情-->
+<script src="modules/businessOrder/controller/businessOrder.js"></script><!--商户订单-->
+<script src="modules/businessOrderAdd/controller/businessOrderAdd.js"></script><!--新增投保-->
+<script src="modules/businessOrderDetails/controller/businessOrderDetails.js"></script><!--商户订单详情-->
+<script src="modules/personalClaim/controller/personalClaim.js"></script><!--个人理赔-->
+<script src="modules/personalClaimDetails/controller/personalClaimDetails.js"></script><!--个人理赔详情-->
+<script src="modules/businessClaim/controller/businessClaim.js"></script><!--商户理赔-->
+<script src="modules/businessClaimAdd/controller/businessClaimAdd.js"></script><!--商户新增理赔-->
+<script src="modules/businessClaimDetails/controller/businessClaimDetails.js"></script><!--商户理赔详情-->
+<script src="modules/auditedBillBack/controller/auditedBillBack.js"></script><!--待审核账单-->
+<script src="modules/settleRecordBack/controller/settleRecordBack.js"></script><!--结算记录-->
+<script src="modules/productManage/controller/productManage.js"></script><!--产品管理-->
+<script src="modules/productManageDefault/controller/productManageDefault.js"></script><!--默认产品-->
+<script src="modules/productManageAdd/controller/productManageAdd.js"></script><!--产品新增-->
+<script src="modules/productManageEdit/controller/productManageEdit.js"></script><!--产品修改-->
+<script src="modules/twoCProductManage/controller/twoCProductManage.js"></script><!--2C产品管理-->
+<script src="modules/interfaceManage/controller/interfaceManage.js"></script><!--保司接口管理-->
+<script src="modules/allPolicies/controller/allPolicies.js"></script><!--所有保单-->
+<script src="modules/pricingFactor/controller/pricingFactor.js"></script><!--定价因子-->
+<script src="modules/returnOrder/controller/returnOrder.js"></script><!--返费订单-->
+<script src="modules/returnBill/controller/returnBill.js"></script><!--返费账单-->
+<script src="modules/accManage/controller/accManage.js"></script><!--账号管理-->
+<script src="modules/businessManage/controller/businessManage.js"></script><!--商户管理-->
+<script src="modules/businessAdd/controller/businessAdd.js"></script><!--新增商户-->
+<script src="modules/businessEdit/controller/businessEdit.js"></script><!--修改商户-->
+<script src="modules/userManage/controller/userManage.js"></script><!--用户管理-->
+<script src="modules/userManageDetailsChina/controller/userManageDetailsChina.js"></script><!--用户详情-中国-->
+<script src="modules/userManageDetailsForeigners/controller/userManageDetailsForeigners.js"></script><!--用户详情-外国-->
+<script src="modules/personalCenter/controller/personalCenter.js"></script><!--个人中心-->
+<script src="modules/notFound/controller/notFoundController.js"></script><!--404-->
+</body>
+</html>

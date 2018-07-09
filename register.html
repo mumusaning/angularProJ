@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="register" lang="en" ng-controller="registerController as vm" ng-init="vm.init()">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <title>商户注册</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min_v3.3.4.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/register.css">
+</head>
+<body>
+<div id="top" class="clearfix">
+    <div class="applogo"><img src="static/images/logo.png"/></div>
+    <div class="userLeft">
+        <h2 class="c_000">豆沙包保险SaaS服务平台</h2>
+    </div>
+</div>
+<div class="regDiv">
+    <h3 class="text_c mb20">商户注册</h3>
+    <div class="overfl mb20">
+        <div class="overfl">
+            <p class="w150 f_l text_r mr20 lh40">手机号：</p>
+            <input type="text" class="form-control w230 f_l" placeholder="请输入手机号"
+                   ng-model="vm.register.username" ng-blur="vm.isUsernameRegister()" ng-focus="vm.errors.usernameText = false" id="username">
+        </div>
+        <div class="regError" ng-class="{'show':vm.errors.usernameText}" ng-if="vm.errors.usernameText"
+             ng-bind="vm.errors.usernameText"></div>
+    </div>
+    <div class="overfl mb20">
+        <div class="overfl">
+            <p class="w150 f_l text_r mr20 lh40">密码：</p>
+            <input type="password" class="form-control w230 f_l" placeholder="请输入密码"
+                   ng-model="vm.register.password" ng-blur="vm.isPassword()" ng-focus="vm.errors.passwordText = false">
+        </div>
+        <div class="regError" ng-class="{'show':vm.errors.passwordText}" ng-if="vm.errors.passwordText"
+             ng-bind="vm.errors.passwordText"></div>
+    </div>
+    <div class="overfl mb20">
+        <div class="overfl">
+            <p class="w150 f_l text_r mr20 lh40">确认密码：</p>
+            <input type="password" class="form-control w230 f_l" placeholder="请输入确认密码"
+                   ng-model="vm.register.confirm_password" ng-blur="vm.iscfmPassword()"
+                   ng-focus="vm.errors.cfmPasswordText = false">
+        </div>
+        <div class="regError" ng-class="{'show':vm.errors.cfmPasswordText}" ng-if="vm.errors.cfmPasswordText"
+             ng-bind="vm.errors.cfmPasswordText"></div>
+    </div>
+    <div class="overfl c_999 text_c">
+        <p>客服邮箱：<a href="mailto:kf@dousha8ao.com">kf@dousha8ao.com</a></p>
+    </div>
+    <div class="overfl text_c mt30">
+        <button class="btn btn-info" ng-click="vm.regiter()" ng-if="vm.errors.username && vm.errors.password && vm.errors.cfmPassword">注册</button>
+        <button class="btn btn-info" disabled="disabled" ng-if="!vm.errors.username || !vm.errors.password || !vm.errors.cfmPassword">注册</button>
+    </div>
+</div>
+<script src="static/js/jquery/jquery-1.10.2.min.js"></script>
+<script src="static/js/angular/angular.min.js"></script>
+<script src="static/js/angular/angular-cookies.min.js"></script>
+<!--<script src="core/configs/testConfig.js"></script>-->
+<script src="core/configs/config.js"></script>
+<script src="core/services/service.js"></script>
+<script src="core/services/layer/layer.js"></script>
+<script src="core/services/layer.js"></script>
+<script src="core/services/util.js"></script>
+
+<script src="modules/register/controller/registerController.js"></script>
+</body>
+</html>

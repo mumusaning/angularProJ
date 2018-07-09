@@ -1,0 +1,25 @@
+.regDiv{
+    width:550px;
+    margin:160px auto 0;
+    background:#fff;
+    padding:30px;
+    box-sizing: border-box;
+    box-shadow:0px 10px 14px rgba(136, 136, 136, .2)
+}
+
+.regError{
+    width:310px;
+    height: 27px;
+    line-height: 24px;
+    margin: 10px auto 0;
+    background: #feefeb;
+    border: 1px solid #f74821;
+    color: #f74821;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding-left:10px;
+    display: none;
+}
+.regError.show{
+    display: block;
+}
